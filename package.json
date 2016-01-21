@@ -4,7 +4,27 @@
   "description": "Shows latest instagram photos with react by using the instagram api",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./dist/ && mkdir ./dist",
+    "watch": "parallelshell 'npm run watch:scripts'",
+    "make:polyfill": "browserify lib/polyfill.js -t babelify | uglifyjs > dist/polyfill.js",
+    "watch:scripts": "bundler ./lib --watch 'lib/**/*.js*' -d -t babelify -t flowcheck -o dist -c package.json",
+    "build:scripts": "bundler ./lib -d -t babelify -t flowcheck -o dist -c package.json",
+    "make:scripts": "bundler ./lib -t babelify -o dist -c package.json",
+    "prebuild": "npm run clean",
+    "build": "npm run build:scripts",
+    "premake": "npm run clean",
+    "make": "npm run make:scripts && npm run make:polyfill"
+  },
+  "bundler": {
+    "paths": [
+      "src",
+      "node_modules",
+      "lib"
+    ],
+    "extensions": [
+      ".js",
+      ".jsx"
+    ]
   },
   "keywords": [
     "react",
@@ -13,5 +33,20 @@
     "feed"
   ],
   "author": "Alexander Skrabl",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel": "5.6.14",
+    "flux": "2.1.1",
+    "react": "0.14.2",
+    "react-dom": "0.14.2",
+    "whatwg-fetch": "0.10.1"
+  },
+  "devDependencies": {
+    "babelify": "6.3.0",
+    "common-bundler": "0.3.0",
+    "browserify": "11.1.0",
+    "flowcheck": "0.2.7",
+    "parallelshell": "1.2.0",
+    "uglifyjs": "2.4.10"
+  }
 }
