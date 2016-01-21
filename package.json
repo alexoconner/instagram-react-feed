@@ -1,0 +1,17 @@
+{
+  "name": "instagram-react",
+  "version": "0.0.1",
+  "description": "Shows latest instagram photos with react by using the instagram api",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "instagram",
+    "photos",
+    "feed"
+  ],
+  "author": "Alexander Skrabl",
+  "license": "ISC"
+}
