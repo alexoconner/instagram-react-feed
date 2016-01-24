@@ -1,6 +1,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { EVENTS } from './constants.js';
+import InstagramStore from './store.js';
 
 class InstagramFeedApp extends React.Component {
     constructor( props ) {
@@ -16,11 +18,13 @@ class InstagramFeedApp extends React.Component {
     }
 }
 
-console.log('test app');
+function render() {
+    ReactDOM.render( <InstagramFeedApp />, document.getElementById( 'App' ) );
+}
 
-//function render() {
-ReactDOM.render( <InstagramFeedApp />, document.getElementById( 'App' ) );
-//}
+InstagramStore.on( EVENTS.UPDATE, render );
+
+InstagramStore.fetch();
 
 // for debbuging
-//window.render = render;
+window.render = render;
